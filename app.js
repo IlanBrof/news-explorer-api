@@ -4,6 +4,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const { celebrate, Joi, errors } = require("celebrate");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv").config(); //eslint-disable-line
 
 const app = express();
 const { PORT, DB_ADDRESS } = require("./utils/serverConfig");
