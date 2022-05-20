@@ -1,7 +1,7 @@
-const { JWT_DEV_SECRET } = require("../utils/serverConfig");
 const { NODE_ENV, JWT_SECRET } = process.env;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const { JWT_DEV_SECRET } = require('../utils/serverConfig');
 const User = require('../models/user');
 const ConflictErr = require('../utils/errors/Conflict');
 const BadRequestErr = require('../utils/errors/Conflict');
