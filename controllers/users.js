@@ -1,10 +1,11 @@
+const { JWT_DEV_SECRET } = require("../utils/serverConfig");
 const { NODE_ENV, JWT_SECRET } = process.env;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
-const ConflictErr = require('../middleware/errors/Conflict');
-const BadRequestErr = require('../middleware/errors/Conflict');
-const UnauthorizedErr = require('../middleware/errors/Unauthorized');
+const ConflictErr = require('../utils/errors/Conflict');
+const BadRequestErr = require('../utils/errors/Conflict');
+const UnauthorizedErr = require('../utils/errors/Unauthorized');
 
 const registration = async (req, res, next) => {
   const { name, password, email } = req.body;
@@ -50,7 +51,7 @@ const login = async (req, res, next) => {
     }
     const token = jwt.sign(
       { _id: user._id },
-      NODE_ENV === 'production' ? JWT_SECRET : 'secret',
+      NODE_ENV === 'production' ? JWT_SECRET : JWT_DEV_SECRET,
       { expiresIn: '7d' },
     );
     res.status(200).send({ token });
@@ -64,7 +65,7 @@ const getUser = async (req, res, next) => {
     const token = req.headers.authorization.replace('Bearer ', '');
     const payload = await jwt.verify(
       token,
-      NODE_ENV === 'production' ? JWT_SECRET : 'secret',
+      NODE_ENV === 'production' ? JWT_SECRET : JWT_DEV_SECRET,
     );
     const user = await User.findById(payload._id);
     return res.status(200).send(user);
