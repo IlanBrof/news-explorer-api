@@ -17,7 +17,7 @@ router.post(
   celebrate({
     body: Joi.object().keys({
       keyword: Joi.string().required(),
-      title: Joi.string().required().min(2).max(100),
+      title: Joi.string().required().min(2).max(150),
       text: Joi.string().required(),
       date: Joi.string().required(),
       source: Joi.string().required(),
