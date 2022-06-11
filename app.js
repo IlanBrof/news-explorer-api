@@ -22,7 +22,7 @@ mongoose.connect(DB_ADDRESS);
 app.use(bodyParser.json());
 app.use(cors());
 app.options('*', cors());
-app.use(limiter);
+// app.use(limiter);
 app.use(helmet());
 app.use(requestLogger);
 
